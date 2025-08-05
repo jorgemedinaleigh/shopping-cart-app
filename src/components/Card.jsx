@@ -2,13 +2,15 @@ import React from 'react'
 import { useState } from 'react'
 import '../styles/card.css'
 
-export const Card = ({image, title, description, price}) => {
+export const Card = ({image, title, description, price, handleAddToCart, handleRemoveFromCart, handleIncreaseQty, handleDecreaseQty}) => {
 
   const [added, SetAdded] = useState(false)
   const clickAdd = () => {
+    handleAddToCart()
     SetAdded(true)
   }
   const clickRemove = () => {
+    handleRemoveFromCart()
     SetAdded(false)
   }
 

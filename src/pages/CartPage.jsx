@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { CartContext } from '../context/CartContext'
 
 export const CartPage = () => {
+
+  const {shoppingList, addPurchase, increaseQty, decreaseQty, deletePurchase} = useContext(CartContext)
+
   return (
     <>
       <table class="table">
@@ -13,12 +17,18 @@ export const CartPage = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Name</td>
-            <td>Price</td>
-            <td>Qty</td>
-            <td>Remove Button</td>
-          </tr>
+          {
+            shoppingList.map(item => (
+              <tr key={item.id}>
+                <td>{item.title}</td>
+                <td>{item.price}</td>
+                <td>1</td>
+                <td>
+                  <button type="button" className="btn btn-danger" onClick={()=>deletePurchase(item.id)}>Remove</button>
+                </td>
+              </tr>
+            ))
+          }
         </tbody>
       </table>
       <div className="text-end">
