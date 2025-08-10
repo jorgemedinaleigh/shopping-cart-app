@@ -5,6 +5,10 @@ export const CartPage = () => {
 
   const {shoppingList, addPurchase, increaseQty, decreaseQty, deletePurchase} = useContext(CartContext)
 
+  const calculateTotal = () => {
+    return shoppingList.reduce((total, item) => total + (item.price * item.qty), 0).toFixed(2)
+  }
+
   return (
     <>
       <table class="table">
@@ -21,14 +25,22 @@ export const CartPage = () => {
             shoppingList.map(item => (
               <tr key={item.id}>
                 <td>{item.title}</td>
-                <td>{item.price}</td>
-                <td>1</td>
+                <td>${item.price}</td>
+                <td>
+                  <button className="btn btn-outline-info" onClick={() => decreaseQty(item.id)}>-</button>
+                  <button className="btn btn-secondary">{item.qty}</button>
+                  <button className="btn btn-outline-info" onClick={()=> increaseQty(item.id)}>+</button>
+                </td>
                 <td>
                   <button type="button" className="btn btn-danger" onClick={()=>deletePurchase(item.id)}>Remove</button>
                 </td>
               </tr>
             ))
           }
+          <th><b>TOTAL:</b></th>
+          <th>${calculateTotal()}</th>
+          <th></th>
+          <th></th>
         </tbody>
       </table>
       <div className="text-end">
