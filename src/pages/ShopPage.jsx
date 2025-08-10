@@ -6,19 +6,13 @@ import { CartContext } from '../context/CartContext'
 export const ShopPage = () => {
   
   const { products } = useContext(ProductsContext)
-  const {shoppingList, addPurchase, increaseQty, decreaseQty, deletePurchase} = useContext(CartContext)
+  const {shoppingList, addPurchase, deletePurchase} = useContext(CartContext)
 
   const handleAddToCart = (product) => {
     addPurchase(product)
   }
   const handleRemoveFromCart = (id) => {
     deletePurchase(id) 
-  }
-  const handleIncreaseQty = (id) => {
-    
-  }
-  const handleDecreaseQty = (id) => {
-    
   }
   
   return (

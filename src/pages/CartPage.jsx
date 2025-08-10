@@ -3,15 +3,18 @@ import { CartContext } from '../context/CartContext'
 
 export const CartPage = () => {
 
-  const {shoppingList, addPurchase, increaseQty, decreaseQty, deletePurchase} = useContext(CartContext)
+  const {shoppingList, increaseQty, decreaseQty, deletePurchase} = useContext(CartContext)
 
   const calculateTotal = () => {
     return shoppingList.reduce((total, item) => total + (item.price * item.qty), 0).toFixed(2)
   }
+  const handlePrint = () => {
+    print()
+  }
 
   return (
     <>
-      <table class="table">
+      <table className="table">
         <thead>
           <tr>
             <th scope="col">Name</th>
@@ -37,14 +40,20 @@ export const CartPage = () => {
               </tr>
             ))
           }
-          <th><b>TOTAL:</b></th>
-          <th>${calculateTotal()}</th>
-          <th></th>
-          <th></th>
+          <tr>
+            <td><b>TOTAL:</b></td>
+            <td>${calculateTotal()}</td>
+            <td></td>
+            <td></td>
+          </tr>
         </tbody>
       </table>
       <div className="text-end">
-        <button className="btn btn-primary">Continue to Payment</button>
+        <button className="btn btn-primary" 
+          onClick={handlePrint}
+          disabled={shoppingList.length === 0}>
+          Continue to Payment
+        </button>
       </div>
     </>
   )
